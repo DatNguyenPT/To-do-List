@@ -13,6 +13,7 @@ public class ToDoItem {
     private String category;
     private String name;
     private boolean complete;
+
     public ToDoItem(){}
     public ToDoItem(String category, String name){
         this.category = category;
@@ -56,4 +57,5 @@ public class ToDoItem {
     public void setComplete(boolean complete) {
         this.complete = complete;
     }
+
 }

@@ -19,30 +19,4 @@ public class ToDoList {
     public void setList(List<ToDoItem> list) {
         this.list = list;
     }
-
-    public void add(ToDoItem item){
-        list.add(item);
-    }
-
-    public void delete(String name){
-        int index = 0;
-        for (ToDoItem item : list){
-            if (item.getName().equals(name)){
-                index = list.indexOf(item);
-                break;
-            }
-        }
-        list.remove(index);
-    }
-
-    public ToDoItem getItem(String name){
-        int index = 0;
-        for (ToDoItem item : list){
-            if (item.getName().equals(name)){
-                index = list.indexOf(item);
-                break;
-            }
-        }
-        return list.get(index);
-    }
 }

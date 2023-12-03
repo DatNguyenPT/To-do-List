@@ -1,11 +1,11 @@
 package com.datnguyen.TodoList;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,14 +28,9 @@ public class Controller {
         jpaRepo.save(item);
         return "redirect:/";
     }
-    @RequestMapping("/update")
-    public String updateTodo(@ModelAttribute ToDoList requestItems) {
-        for (ToDoItem requestItem : requestItems.getList()) {
-            ToDoItem item = new ToDoItem(requestItem.getCategory(), requestItem.getName());
-            item.setComplete(requestItem.isComplete());
-            item.setId(requestItem.getId());
-            jpaRepo.save(item);
-        }
+    @PostMapping(value = "/delete/{name}")
+    public String deleteTask(@PathVariable String name) {
+        jpaRepo.deleteByName(name);
         return "redirect:/";
     }
 }

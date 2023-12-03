@@ -22,35 +22,37 @@
 <!-- Body -->
 <div class="container">
     <h1>My ToDo List</h1>
-
     <hr/>
-
     <div class="list">
-        <form class="form-horizontal" role="form" th:action="@{/update}" th:object="${items}" method="POST">
+        <form class="form-horizontal" role="form" th:action="@{/}" th:object="${items}" method="get">
             <table class="table table-bordered table-striped" id="todoItems">
                 <thead>
                 <tr>
                     <th>Name</th>
                     <th>Category</th>
                     <th>Complete</th>
+                    <th>Modify</th>
                 </tr>
                 </thead>
+                <tbody>
                 <tbody>
                 <tr th:each="item, i : *{list}" th:class="${item.complete} ? 'active' : 'warning'">
                     <td><input type="hidden" th:field="*{list[__${i.index}__].id}"/><span th:text="${item.name}">Item_name</span></td>
                     <td><input type="hidden" th:field="*{list[__${i.index}__].category}"/><span th:text="${item.category}">item_category</span></td>
                     <td><input type="checkbox" th:checked="${item.complete}" th:field="*{list[__${i.index}__].complete}"/></td>
+                    <td>
+                        <form th:action="@{'/delete/' + ${item.name}}" method="post">
+                            <input type="hidden" name="_method" value="DELETE" />
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
                 </tr>
                 </tbody>
             </table>
-            <!-- Update Button -->
-            <button type="submit" class="btn btn-primary">Update Tasks</button>
-            <button type="submit" class="btn btn-primary">Delete Tasks</button>
+
         </form>
     </div>
-
     <hr/>
-
     <!-- Item Input Form -->
     <div class="todoForm">
         <form class="form-horizontal" role="form" th:action="@{/add}" th:object="${newitem}" method="POST">
